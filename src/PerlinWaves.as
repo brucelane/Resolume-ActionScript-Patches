@@ -24,8 +24,12 @@ package {
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	[SWF(width = "640", height = "480", frameRate = "30", backgroundColor = "#000000")]
 	
+	import resolumeCom.*;
+	import resolumeCom.events.*;
+	import resolumeCom.parameters.*;
+	
+	[SWF(width = "640", height = "480", frameRate = "30", backgroundColor = "#000000")]
 	public class PerlinWaves extends Sprite {
 		
 		// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚µã‚¤ã‚ºé–¢ä¿‚
@@ -68,12 +72,17 @@ package {
 		private const BLUR:BlurFilter = new BlurFilter(16, 16, BitmapFilterQuality.HIGH);
 		private const COLOR_TRANS:ColorTransform = new ColorTransform(1, 1, 1, 0.25);
 		
+		private var mx:int = 0;
+		private var my:int = 0;
+		private var resolume:Resolume = new Resolume();
+		private var xSlider:FloatParameter = resolume.addFloatParameter("x speed", 0.5);
+		private var ySlider:FloatParameter = resolume.addFloatParameter("y speed", 0.5);
 		
 		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		public function PerlinWaves() {
 			setup();
 			addEventListener(Event.ENTER_FRAME, update);
-			stage.addEventListener(MouseEvent.CLICK, clickHandler);
+			//stage.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
 		// ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
@@ -101,7 +110,20 @@ package {
 				angle += INTERVAL_COLOR;
 			}
 			colors_.fixed = true;
+			resolume.addParameterListener(parameterChanged);
 		}
+		//this method will be called everytime you change a paramater in Resolume
+		public function parameterChanged(event:ChangeEvent): void
+		{
+			if(event.object == this.xSlider) 
+			{
+				mx = Math.round(this.xSlider.getValue() * SW);
+			}
+			else if(event.object == this.ySlider) 
+			{
+				my = Math.round(this.ySlider.getValue() * SH);
+			}
+		}		
 		
 		// ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
 		private function update(e:Event):void {
@@ -112,8 +134,8 @@ package {
 		// perlinNoise ã®æ›´æ–°
 		private function updatePerlinNoise():void {
 			// offsets_ ã®æ›´æ–°
-			var offsetX:Number = (mouseX / CX - 1) * 0.5;
-			var offsetY:Number = (mouseY / CY - 1) * 0.5;
+			var offsetX:Number = (mx / CX - 1) * 0.5;
+			var offsetY:Number = (my / CY - 1) * 0.5;
 			offsets_[0].x += offsetX;
 			offsets_[0].y += offsetY;
 			offsets_[1].x -= offsetX;
