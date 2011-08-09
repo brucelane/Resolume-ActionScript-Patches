@@ -94,25 +94,26 @@ package {
 		public function parameterChanged(event:ChangeEvent): void
 		{
 			if (multiplier==0) multiplier=0.001;
+			//multiplier= 40;
 			if(event.object == this.leftSlider) 
 			{
-				l1 = Math.round(this.leftSlider.getValue()/multiplier);
+				l1 = this.leftSlider.getValue()/multiplier;
 			}
 			else if(event.object == this.leftSlider2) 
 			{
-				l2 = Math.round(this.leftSlider2.getValue()/multiplier);
+				l2 = this.leftSlider2.getValue()/multiplier;
 			}
 			else if(event.object == this.rightSlider) 
 			{
-				r1 = Math.round(this.rightSlider.getValue()/multiplier);
+				r1 = this.rightSlider.getValue()/multiplier;
 			}
 			else if(event.object == this.rightSlider2) 
 			{
-				r2 = Math.round(this.rightSlider2.getValue()/multiplier);
+				r2 = this.rightSlider2.getValue()/multiplier;
 			}
 			else if(event.object == this.multiplierSlider) 
 			{
-				multiplier = Math.round(this.multiplierSlider.getValue()+0.00001);
+				multiplier = (this.multiplierSlider.getValue() + 0.001 ) *40;
 			}
 		}			
 		private function nextTrack (e:MouseEvent):void {
@@ -167,6 +168,11 @@ package {
 			waves.w1.A2 = l2;
 			waves.w2.A = r1; 
 			waves.w2.A2 = r2;
+			/*var fjf:Number = 0.4;
+			waves.w1.A = fjf; 
+			waves.w1.A2 = fjf;
+			waves.w2.A = fjf; 
+			waves.w2.A2 = fjf;*/
 			
 			// swing balls
 			metaballs.a = 1 + Math.sin (2.1e-3 * getTimer ());

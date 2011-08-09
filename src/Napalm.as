@@ -14,9 +14,15 @@ package {
 	import flash.geom.ColorTransform;
 	import flash.filters.BlurFilter;
 	import flash.display.BlendMode;
+	import resolumeCom.*;
+	import resolumeCom.events.*;
+	import resolumeCom.parameters.*;
 	
 	[SWF(frameRate="60", backgroundColor="0x000000")]
 	public class Napalm extends Sprite {
+		
+		private const WIDTH:int = 640;
+		private const HEIGHT:int = 480;
 		
 		public var emitter:Emitter;
 		
@@ -30,6 +36,12 @@ package {
 		
 		private var blurFilter:BlurFilter;
 		private var blurFilter2:BlurFilter;
+		
+		private var resolume:Resolume = new Resolume();
+		private var xSlider:FloatParameter = resolume.addFloatParameter("x", 0.5);
+		private var ySlider:FloatParameter = resolume.addFloatParameter("y", 0.5);
+		private var mx:int = WIDTH/2;
+		private var my:int = HEIGHT/2;
 		
 		public function Napalm() {
 			// write as3 code here..
@@ -52,11 +64,12 @@ package {
 				//emitter.y = stage.mouseY;
 				//emitter.emit();
 			});
+			resolume.addParameterListener(parameterChanged);
 			
 			addEventListener(Event.ENTER_FRAME,function(e:Event):void
 			{
-				emitter.x = stage.mouseX;
-				emitter.y = stage.mouseY;
+				emitter.x = mx;
+				emitter.y = my;
 				emitter.emit();
 				
 				console.clear();
@@ -90,6 +103,18 @@ package {
 			});
 
 		}
+		//this method will be called everytime you change a paramater in Resolume
+		public function parameterChanged(event:ChangeEvent): void
+		{
+			if(event.object == this.xSlider) 
+			{
+				mx = this.xSlider.getValue() * WIDTH;
+			}
+			else if(event.object == this.ySlider) 
+			{
+				my = this.ySlider.getValue() * HEIGHT;
+			}
+		}	
 	}
 }
 import flash.display.AVM1Movie;
