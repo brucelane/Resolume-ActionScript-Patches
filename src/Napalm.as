@@ -32,8 +32,6 @@ package {
 		private var iParticles:uint = 0;
 		private var particlesLength:uint = 0;
 		
-		private var console:Console;
-		
 		private var blurFilter:BlurFilter;
 		private var blurFilter2:BlurFilter;
 		
@@ -55,9 +53,6 @@ package {
 			blurFilter = new BlurFilter(2, 2, 1);
 			blurFilter2 = new BlurFilter(4, 4, 1);
 			
-			console = new Console();
-			addChild(console);
-			
 			addEventListener(MouseEvent.MOUSE_MOVE, function(e:Event):void
 			{
 				//emitter.x = stage.mouseX;
@@ -72,14 +67,7 @@ package {
 				emitter.y = my;
 				emitter.emit();
 				
-				console.clear();
-				console.log('update');
-				
-				console.log('previous Particles:' + String(emitter.particles.length));
-				
 				emitter.update();
-				
-				console.log('current Particles:' + String(emitter.particles.length));
 				
 				particlesLength = emitter.particles.length;
 				
@@ -371,33 +359,4 @@ class Particle {
 		this.ry = ry;
 		this.lifeTime = this.maxLifeTime =  lifeTime;
 	}
-}
-
-import flash.text.TextField;
-import flash.events.Event;
-class Console extends TextField
-{
-	public function Console()
-	{
-		text = '';
-		selectable = false;
-		textColor = 0xFFFFFF;
-		addEventListener(Event.ADDED_TO_STAGE, function(e:Event):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, arguments.callee);
-			width = stage.stageWidth;
-			height = stage.stageHeight;
-			
-		});
-	}
-	
-	public function log(message:String):void
-	{
-		this.appendText(message + '\n');
-	}
-	
-	public function clear():void{
-		this.text = '';
-	}
-	
 }
