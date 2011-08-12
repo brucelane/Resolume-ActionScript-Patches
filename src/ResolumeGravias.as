@@ -19,19 +19,22 @@ package {
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
 	
+	import resolume.asset.GraviasImage;
+	import resolume.core.*;
+	import resolume.display.Surface;
+	import resolume.display.SurfaceContext;
+	import resolume.plugin.Patch;
+	
 	import resolumeCom.*;
 	import resolumeCom.events.*;
 	import resolumeCom.parameters.*;
 
 	[SWF(width='640', height='480', frameRate='30', backgroundColor='0x333333')] 
-	public class ResolumeGravias extends MovieClip {
-		
-		
+	final public class ResolumeGravias extends Patch implements ISurfaceGenerator 
+	{		
 		public const mouseForce:Number = 20;
 		public const oscillationDumper:Number = 0.05;
 		public const minimalMovement   :Number = 0.001;
-		
-		public var loader:Loader;
 		
 		public var sourceBMP:BitmapData;
 		public var pictureX:Number;
@@ -58,14 +61,13 @@ package {
 		private var xSlider:FloatParameter = resolume.addFloatParameter("x Bang", 0.5);
 		private var ySlider:FloatParameter = resolume.addFloatParameter("y Bang", 0.5);
 		private var paramExplode:EventParameter = resolume.addEventParameter("Explode!");
+		private var context:SurfaceContext;
 		
 		public function ResolumeGravias() {
 			
-			loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE,loaded);
+			init();
 			
-			var url:String = "batchass200.png";     
-			loader.load(new URLRequest(url),new LoaderContext(true));
+			addChild(bmp);
 			resolume.addParameterListener(parameterChanged);
 		}
 		//this method will be called everytime you change a paramater in Resolume
@@ -85,19 +87,14 @@ package {
 			}
 		}		
 		
-		private function loaded(e:Event):void
-		{
-			init();
+		override public function initialize(layer:IDisplayLayer, context:SurfaceContext):int {
 			
-			stage.addEventListener(Event.ENTER_FRAME,frame,false,0,true);
 			
-			addChild(bmp);
-		}
-		
-		
+			return super.initialize(layer, context);
+		}		
 		private function init():void
 		{
-			sourceBMP = (loader.content as Bitmap).bitmapData;
+			sourceBMP = new GraviasImage();
 			pictureX = (stage.stageWidth-sourceBMP.width)/2;
 			pictureY = (stage.stageHeight-sourceBMP.height)/2;
 			matrix = new Array();
@@ -110,9 +107,14 @@ package {
 			bmp = new Bitmap(view);
 			
 			createPoints();
+			stage.addEventListener(Event.ENTER_FRAME,frame,false,0,true);
 			
 		}
+		public function update(time:Number):void {}
 		
+		final public function getTotalTime():int {
+			return 0;
+		}
 		private function frame(evt:Event):void {
 			view.lock();
 			
@@ -186,7 +188,9 @@ package {
 			}
 			
 			view.unlock();
-			
+		}
+		public function render(context:SurfaceContext, surface:Surface):void {
+			surface.draw(view, null, null, null, null, true);			
 		}        
 		
 		private function createPoints():void {
