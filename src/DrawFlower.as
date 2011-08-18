@@ -42,12 +42,12 @@ package
 		/////////////////////////////////////////////////////////////////////////
 		
 		private var resolume:Resolume = new Resolume();
-		private var _slider1:FloatParameter = resolume.addFloatParameter("a", 0.5);
-		private var _slider2:FloatParameter = resolume.addFloatParameter("b", 0.5);
-		private var _slider3:FloatParameter = resolume.addFloatParameter("c", 0.5);
-		private var _slider4:FloatParameter = resolume.addFloatParameter("d", 0.5);
-		private var _slider5:FloatParameter = resolume.addFloatParameter("e", 0.5);
-		private var _slider6:FloatParameter = resolume.addFloatParameter("f", 0.5);	
+		private var _slider1:FloatParameter = resolume.addFloatParameter("numPetals", 0.5);
+		private var _slider2:FloatParameter = resolume.addFloatParameter("width", 0.5);
+		private var _slider3:FloatParameter = resolume.addFloatParameter("height", 0.5);
+		private var _slider4:FloatParameter = resolume.addFloatParameter("fy", 0.5);
+		private var _slider5:FloatParameter = resolume.addFloatParameter("ft", 0.5);
+		private var _slider6:FloatParameter = resolume.addFloatParameter("k", 0.5);	
 		
 		
 		/* Main Function */
@@ -63,7 +63,6 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init );
 			setStage();
-			UIset();
 			
 			flowerInit();
 			
@@ -74,22 +73,9 @@ package
 				loaderInfo.removeEventListener(Event.UNLOAD, arguments.callee );
 			});
 		}
-		private function UIset():void{
-			/*_slider1 = new HUISlider(this, 0, 10, "Parameter", paramHandler);
-			_slider2 = new HUISlider(this, 0, 25, "Parameter", paramHandler);
-			_slider3 = new HUISlider(this, 0, 40, "Parameter", paramHandler);
-			_slider4 = new HUISlider(this, 0, 55, "Parameter", paramHandler);
-			_slider5 = new HUISlider(this, 0, 70, "Parameter", paramHandler);
-			_slider6 = new HUISlider(this, 0, 85, "Parameter", paramHandler);
-			_radioOUT = new RadioButton(this, 10, 105, "ON",  false, onSelect);
-			_radioIN  = new RadioButton(this, 50, 105, "OFF", true, onSelect);*/
-		}
+
 		private function parameterChanged(e:ChangeEvent):void
 		{
-			/*if(e.object == this._slider1) 
-			{
-				NUM = (this._slider1.getValue() *  100 /4)+5; 
-			}*/
 			switch(e.object){
 				case _slider1:
 					NUM = Math.round(this._slider1.getValue() * 100 /4)+5;    // 0 - 25 + 5            
