@@ -25,16 +25,19 @@ package
 }
 
 //package {
+import flash.display.MovieClip;
+import flash.geom.ColorTransform;
+
+import frocessing.color.ColorHSV;
 import frocessing.display.F5MovieClip2DBmp;
 import frocessing.geom.FMatrix2D;
-import frocessing.color.ColorHSV;
-import flash.geom.ColorTransform;
 
 import resolumeCom.*;
 import resolumeCom.events.*;
 import resolumeCom.parameters.*;
 
 internal class WormMatrix extends F5MovieClip2DBmp{
+
 	
 	private var vms:Array;
 	private var MAX_NUM:int = 150; 
