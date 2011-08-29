@@ -50,8 +50,8 @@ internal class WormMatrix extends F5MovieClip2DBmp{
 	private var mx:int = 0;
 	private var my:int = 0;
 	private var resolume:Resolume = new Resolume();
-	private var xSlider:FloatParameter = resolume.addFloatParameter("x Bang", 0.5);
-	private var ySlider:FloatParameter = resolume.addFloatParameter("y Bang", 0.5);
+	private var xSlider:FloatParameter = resolume.addFloatParameter("x", 0.5);
+	private var ySlider:FloatParameter = resolume.addFloatParameter("y", 0.5);
 	
 	public function WormMatrix () {
 		//col = c

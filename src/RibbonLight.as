@@ -13,13 +13,13 @@ package  {
 	import flash.filters.BlurFilter;
 	import flash.geom.Point;
 	import flash.geom.ColorTransform;
-	
-	[SWF(width=465,height=465,backgroundColor=0x000000,frameRate=60)]
+
+	[SWF(width = "640", height = "480", frameRate = "60", backgroundColor = "0")]
 	
 	public class RibbonLight extends Sprite{
 		
-		private const WIDTH:Number  = 465;
-		private const HEIGHT:Number = 465;
+		private const WIDTH:Number  = 640;
+		private const HEIGHT:Number = 480;
 		
 		private var _sketch:CurveSketch;
 		private var _bmd:BitmapData;
@@ -27,9 +27,9 @@ package  {
 		private var _container:Sprite = new Sprite();
 		
 		public function RibbonLight() {
-			graphics.beginFill(0)
-			graphics.drawRect(0, 0, WIDTH, HEIGHT)
-			graphics.endFill()
+			graphics.beginFill(0);
+			graphics.drawRect(0, 0, WIDTH, HEIGHT);
+			graphics.endFill();
 			addChild(_container);
 			//
 			_sketch = new CurveSketch();
@@ -37,6 +37,7 @@ package  {
 			_container.addChild(_sketch);
 			_container.addChild(_bm = new Bitmap(_bmd) as Bitmap);
 			_bm.blendMode = "add";
+			
 			//
 			addEventListener(Event.ENTER_FRAME, update);
 		}
@@ -54,6 +55,10 @@ package  {
 import frocessing.display.F5MovieClip2D;
 import frocessing.geom.FGradientMatrix;
 import frocessing.color.ColorHSV
+	
+import resolumeCom.*;
+import resolumeCom.events.*;
+import resolumeCom.parameters.*;
 	
 	class CurveSketch extends F5MovieClip2D
 	{
@@ -81,6 +86,12 @@ import frocessing.color.ColorHSV
 		//æç”»ã‚°ãƒ«ãƒ¼ãƒ—
 		private var shapes:Array;
 		
+		private var resolume:Resolume = new Resolume();
+		private var xSlider:FloatParameter = resolume.addFloatParameter("x", 0.5);
+		private var ySlider:FloatParameter = resolume.addFloatParameter("y", 0.5);
+		private var mx:int = 0;
+		private var my:int = 0;
+
 		public function CurveSketch() 
 		{
 			
@@ -97,15 +108,28 @@ import frocessing.color.ColorHSV
 			
 			shapes = [];
 			
+			resolume.addParameterListener(parameterChanged);
+			
 			//ç·šã¨å¡—ã‚Šã®è‰²æŒ‡å®š
 			noStroke();            
 		}
-		
+		//this method will be called everytime you change a paramater in Resolume
+		public function parameterChanged(event:ChangeEvent): void
+		{
+			if(event.object == this.xSlider) 
+			{
+				mx = Math.round(this.xSlider.getValue() * 640);
+			}
+			else if(event.object == this.ySlider) 
+			{
+				my = Math.round(this.ySlider.getValue() * 480);
+			}
+		}		
 		public function draw():void
 		{
 			//åŠ é€Ÿåº¦é‹å‹•
-			xx += vx += ( mouseX - xx ) * ac;
-			yy += vy += ( mouseY - yy ) * ac;
+			xx += vx += ( mx - xx ) * ac;
+			yy += vy += ( my - yy ) * ac;
 			
 			var len:Number = mag( vx, vy );
 			
