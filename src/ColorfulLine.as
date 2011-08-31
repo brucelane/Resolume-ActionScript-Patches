@@ -17,11 +17,15 @@ package
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
+	import resolumeCom.*;
+	import resolumeCom.events.*;
+	import resolumeCom.parameters.*;
+
 	/**
 	 * @author flashhawk
 	 * blog http://www.flashquake.cn
 	 */
-	[SWF(backgroundColor="#000000", width="465", height="465", frameRate="30")]
+	[SWF(width = "640", height = "480", frameRate = "60", backgroundColor = "0")]
 	
 	public class ColorfulLine extends Sprite 
 	{
@@ -40,11 +44,33 @@ package
 		private var gi : Number = 0.015; 
 		private var bi : Number = 0.025; 
 		
+		private var mx:int = 0;
+		private var my:int = 0;
+		private var resolume:Resolume = new Resolume();
+		private var xSlider:FloatParameter = resolume.addFloatParameter("x", 0.5);
+		private var ySlider:FloatParameter = resolume.addFloatParameter("y", 0.5);
+
 		public function ColorfulLine()
 		{
 			matrix.scale(0.1, 0.1);
+			resolume.addParameterListener(parameterChanged);
 			this.addEventListener(Event.ADDED_TO_STAGE, init);
 		}
+		
+		//this method will be called everytime you change a paramater in Resolume
+		public function parameterChanged(event:ChangeEvent): void
+		{
+			if(event.object == this.xSlider) 
+			{
+				mx = Math.round(this.xSlider.getValue() * 640);
+				particles.push(new Particle(mx*0.5, my*0.5, 30));
+			}
+			else if(event.object == this.ySlider) 
+			{
+				my = Math.round(this.ySlider.getValue() * 480);
+				particles.push(new Particle(mx*0.5, my*0.5, 30));
+			}
+		}		
 		
 		private function init(e : Event) : void
 		{
@@ -53,7 +79,7 @@ package
 			
 			lineCanvas = new Sprite();
 			
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			//stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			this.addEventListener(Event.ENTER_FRAME, loop);
 			stage.addEventListener(Event.RESIZE, initBitmapCanvas);
 			initBitmapCanvas();
@@ -122,10 +148,10 @@ package
 			addChildAt(blurBmp, 0);
 		}
 		
-		private function mouseMoveHandler(e : MouseEvent) : void
+		/*private function mouseMoveHandler(e : MouseEvent) : void
 		{
 			particles.push(new Particle(mouseX*0.5, mouseY*0.5, 30));
-		}
+		}*/
 	}
 }
 
