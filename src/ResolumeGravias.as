@@ -19,7 +19,7 @@ package {
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
 	
-	import resolume.asset.GraviasImage;
+	import resolume.asset.BatchassImage;
 	import resolume.core.*;
 	import resolume.display.Surface;
 	import resolume.display.SurfaceContext;
@@ -94,7 +94,7 @@ package {
 		}		
 		private function init():void
 		{
-			sourceBMP = new GraviasImage();
+			sourceBMP = new BatchassImage();
 			pictureX = (stage.stageWidth-sourceBMP.width)/2;
 			pictureY = (stage.stageHeight-sourceBMP.height)/2;
 			matrix = new Array();

@@ -21,7 +21,7 @@ package {
 	import resolumeCom.events.*;
 	import resolumeCom.parameters.*;
 	
-	[SWF(frameRate="60", backgroundColor="0xffffff")]
+	[SWF(width = "640", height = "480", frameRate = "60", backgroundColor = "0xffffff")]
 	public class BlackInk extends Sprite {
 		
 		private const WIDTH:int = 640;
@@ -54,12 +54,12 @@ package {
 			//emitter = new Emitter(0,0,0,0,0,0,.9,.9,1,8,30,120,60,-0.3);
 			emitter = new Emitter(0,0,0,0,0,0,.9,.9,1,2,30,80,60,-0.3);
 			
-			canvas = new BitmapData(465, 465, true, 0x00000000);
-			buffer = new BitmapData(465, 465, true, 0x00000000);
+			canvas = new BitmapData(640, 480, true, 0x00000000);
+			buffer = new BitmapData(640, 480, true, 0x00000000);
 			
 			_rect = canvas.rect;
 			
-			var map:BitmapData = new BitmapData(465, 465);
+			var map:BitmapData = new BitmapData(640, 480);
 			map.perlinNoise(84, 84, 5, Math.random()*100, false, true, 1, true);
 			var bmp:Bitmap = new Bitmap(buffer);
 			bmp.filters = [new DisplacementMapFilter(map, _ep, 1, 1, 64, 64, DisplacementMapFilterMode.CLAMP)];

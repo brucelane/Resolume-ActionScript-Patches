@@ -25,8 +25,8 @@ package
 	import resolumeCom.*;
 	import resolumeCom.events.*;
 	import resolumeCom.parameters.*;
-	[SWF(backgroundColor = 0x000000, frameRate = 60)]
 	
+	[SWF(width = "640", height = "480", frameRate = "60", backgroundColor = "0")]
 	/**
 	 * ...
 	 * @author rettuce

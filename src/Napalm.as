@@ -18,7 +18,7 @@ package {
 	import resolumeCom.events.*;
 	import resolumeCom.parameters.*;
 	
-	[SWF(frameRate="60", backgroundColor="0x000000")]
+	[SWF(width = "640", height = "480", frameRate = "60", backgroundColor = "0")]
 	public class Napalm extends Sprite {
 		
 		private const WIDTH:int = 640;
@@ -46,8 +46,8 @@ package {
 			//emitter = new Emitter();
 			emitter = new Emitter(0,0,0,0,0,0,.9,.9,1,8,30,120,60,-0.3);
 			
-			canvas = new BitmapData(465, 465, true, 0x00000000);
-			buffer = new BitmapData(465, 465, true, 0x00000000);
+			canvas = new BitmapData(640, 480, true, 0x00000000);
+			buffer = new BitmapData(640, 480, true, 0x00000000);
 			addChild(new Bitmap(buffer));
 			
 			blurFilter = new BlurFilter(2, 2, 1);
@@ -85,7 +85,7 @@ package {
 				canvas.unlock();
 				buffer.lock();
 				buffer.applyFilter( buffer, buffer.rect, buffer.rect.topLeft, blurFilter2 );
-				buffer.colorTransform(new Rectangle(0,0,465,465), new ColorTransform(1, 1, 1, .7));
+				buffer.colorTransform(new Rectangle(0,0,640, 480), new ColorTransform(1, 1, 1, .7));
 				buffer.draw(canvas,null,null,BlendMode.ADD);
 				buffer.unlock();
 			});
