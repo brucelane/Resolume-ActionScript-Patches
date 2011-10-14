@@ -36,21 +36,30 @@ package
 	[SWF(width='640', height='480', frameRate='30', backgroundColor='0x333333')]
 	public class FluidSolva extends Sprite 
 	{
-		/*private const WIDTH:int = 640;
-		private const HEIGHT:int = 480;*/
-		
-		//create the resolume object that will do all the hard work for you
+		//create the resolume object
 		private var resolume:Resolume = new Resolume();
-		private var xSlider:FloatParameter = resolume.addFloatParameter("x", 0.5);
-		private var ySlider:FloatParameter = resolume.addFloatParameter("y", 0.5);
+		//sliders
+		private var xSlider:FloatParameter = resolume.addFloatParameter("draw x", 0.5);
+		private var ySlider:FloatParameter = resolume.addFloatParameter("draw y", 0.5);
+		private var deltaSlider:FloatParameter = resolume.addFloatParameter("delta", 0.5);
+		private var viscosSlider:FloatParameter = resolume.addFloatParameter("viscosity", 0.00015);
+		private var fadeSlider:FloatParameter = resolume.addFloatParameter("fade", 0.007);
+		private var precSlider:FloatParameter = resolume.addFloatParameter("prec", 0.1);
+		private var colorDiffusionSlider:FloatParameter = resolume.addFloatParameter("color diffusion", 0);
+		//button
+		private var switchEvent:EventParameter = resolume.addEventParameter("Switch mode!");
+		
 		private const origin:Point = new Point();
 		private const identity:Matrix = new Matrix();
 		private const blur:BlurFilter = new BlurFilter( 2, 2, 2 );
 		private const fade2black:ColorTransform = new ColorTransform( 0.9, 0.9, 0.9 );
 		private const fade2alpha:ColorTransform = new ColorTransform( 1, 1, 1, .7);
 		
-		public static const sw:uint = 640;//1024;
-		public static const sh:uint = 480;//768;
+		public static const sw:uint = 640;
+		public static const sh:uint = 480;
+		
+		private var xs:uint = 320;
+		private var ys:uint = 240;
 		
 		private static const DRAW_SCALE:Number = 0.5;
 		
@@ -69,11 +78,11 @@ package
 		public static var drawLines:Boolean = false;
 		public static var drawMode:uint = 0;
 		
-		public static var screen:BitmapData = new BitmapData(sw, sh, true, 0);
+		public static var screen:BitmapData = new BitmapData(sw, sh, true, 0x00FF0000);//??? 0);
 		public static var fluid:BitmapData = new BitmapData(fSolver.width - 2, fSolver.height - 2, false, 0);
 		public static var fluidBuffer:Vector.<uint> = new Vector.<uint>(fluid.width * fluid.height, true);
 		
-		private var fade:BitmapData = new BitmapData(sw * DRAW_SCALE, sh * DRAW_SCALE, false, 0x0);
+		private var fade:BitmapData = new BitmapData(sw * DRAW_SCALE, sh * DRAW_SCALE, true, 0x00FF0000);//, false, 0x0);
 		
 		private var drawMatrix:Matrix = new Matrix(DRAW_SCALE, 0, 0, DRAW_SCALE, 0, 0);
 		private var drawColor:ColorTransform = new ColorTransform(0.1, 0.1, 0.1);
@@ -81,57 +90,42 @@ package
 		private var sparkle:BitmapData = new BitmapData(sw/4, sh/4, true, 0x0);
 		private var sparkleDrawMatrix:Matrix = new Matrix(0.25, 0, 0, 0.25, 0, 0);
 		
-		/*public static var mx:uint = 0;
-		public static var my:uint = 0;*/
-		
 		public static var frameCount:uint = 0;
 		
 		private var display:Bitmap;
 		private var pm:ParticleManager;
 		private var prevMouse:Point = new Point();
 		private var fluidImage:Bitmap;
-		//private var controls:Controls;
 		
 		public function FluidSolva() 
 		{
-			//addEventListener(Event.ENTER_FRAME, enterFrame);
-			
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		//this method will be called everytime you change a paramater in Resolume
 		public function parameterChanged(event:ChangeEvent): void
 		{
-			x = Math.round(this.xSlider.getValue() * sw);
-			y = Math.round(this.ySlider.getValue() * sh);
+			xs = Math.round(this.xSlider.getValue() * sw);
+			ys = Math.round(this.ySlider.getValue() * sh);
 			
-			if ( y <= 40) return;
+			fSolver.deltaT = this.deltaSlider.getValue() * 2;
+			fSolver.viscosity = this.viscosSlider.getValue() * .002;
+			fSolver.fadeSpeed = this.fadeSlider.getValue() * .01;
+			fSolver.solverIterations = Math.round(this.precSlider.getValue() * 10);
+			fSolver.colorDiffusion = this.colorDiffusionSlider.getValue() * .001;
 			
-			/*if (e is MouseEvent)
-			{*/			
-				handleForce(x, y - 40);
-			/*}
-			else
-			{				
-				const NormX:Number = x * isw;
-				const NormY:Number = (y - 40) * ish;
-				const VelX:Number = 0.5; //TODO?(e.dY) * isw; //why does this have to be opposite?
-				const VelY:Number = 0.5; //TODO?(e.dX) * ish; //why does this have to be opposite? 
-				
-				addForce(NormX, NormY, VelX, VelY);
-			}*/								
-			
+			if(event.object == this.switchEvent) 
+			{
+				restart();
+			}			
+			if ( ys > 40) handleForce(xs, ys - 40);
 		}
 		private function init(e:Event = null):void 
 		{
-			
-			//Setup TUIO for TouchEvents
-			//TUIO.init(this, 'localhost', 3000, '', true);			
-			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			resolume.addParameterListener(parameterChanged);
 			initStage();
-			
+			//fSolver.
 			fSolver.rgb = true;
 			fSolver.fadeSpeed = .007;
 			fSolver.deltaT = .5;
@@ -162,25 +156,18 @@ package
 			b.blendMode = BlendMode.ADD;
 			b.scaleX = b.scaleY = 4;
 			
-			//controls = new Controls();
-			
 			addChild(fluidImage);
 			addChild(fadeImage);
 			addChild(display);
 			addChild(b);
-			//addChild(controls);
 			
 			addEventListener(Event.ENTER_FRAME, render);
-			//stage.addEventListener(MouseEvent.MOUSE_MOVE, onMove);
-			
 			stage.addEventListener(MouseEvent.CLICK, restart);		
 			
 		}
 		
-		private function restart(e:MouseEvent):void
+		private function restart():void
 		{
-			if (mouseY <= 40) return;
-			
 			drawMode = ++drawMode % 4;
 			
 			fade.fillRect(fade.rect, 0x0);
@@ -236,10 +223,7 @@ package
 				drawParticlesBitmap();
 				//trace(getTimer() - t);
 			}
-			
-			/*if(mx != 0 || my != 0) {
-				//moveScreen(); TODO?move all screen
-			}*/
+
 			
 			frameCount = ++frameCount % 0xFFFFFFFF;
 		}
@@ -329,21 +313,6 @@ package
 				fSolver.vOld[index] += dy * velocityMult;
 			}
 		}
-		
-		/*public static function setScroll(sx:Boolean = false, sy:Boolean = false):void
-		{
-			if (sx) {
-				mx = 4;
-			} else {
-				mx = 0;
-			}
-			
-			if (sy) {
-				my = 4;
-			} else {
-				my = 0;
-			}
-		}*/
 		
 		private function initStage():void
 		{
