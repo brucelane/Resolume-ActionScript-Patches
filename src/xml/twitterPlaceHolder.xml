@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Thu May 05 01:13:02 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+  <truncated>false</truncated>
+
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+  <user>
+
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon Apr 25 17:41:14 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection
+  </text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Apr 22 14:34:55 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Apr 21 13:30:55 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Wed Apr 20 11:03:29 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Tue Apr 19 13:37:26 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>2</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Apr 15 14:31:21 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Apr 14 10:27:39 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>4</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Apr 07 09:50:47 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Mar 31 10:33:12 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>2</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Mar 11 22:45:04 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source></source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon Mar 07 18:11:24 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>1</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Mar 03 17:19:03 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Wed Mar 02 16:17:21 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>3</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+   
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <contributors/>
+</status>
+
+<status>
+  <created_at>Sun Feb 27 12:26:51 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source></source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun Feb 27 00:31:29 +0000 2011</created_at>
+  <id>4Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source></source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>2</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sat Feb 26 00:38:39 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Twitter Feed Not Available</text>
+  <source></source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>0</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Feb 25 17:47:16 +0000 2011</created_at>
+  <id>Twitter user ID</id>
+  <text>Check your internet connection</text>
+  <source>web</source>
+
+  <truncated>false</truncated>
+  <favorited>false</favorited>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <retweet_count>5</retweet_count>
+  <retweeted>false</retweeted>
+
+  <user>
+  </user>
+  <geo/>
+  <coordinates/>
+
+  <contributors/>
+</status>
+
+</statuses>
