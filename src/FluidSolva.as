@@ -46,8 +46,12 @@ package
 		private var fadeSlider:FloatParameter = resolume.addFloatParameter("fade", 0.007);
 		private var precSlider:FloatParameter = resolume.addFloatParameter("prec", 0.1);
 		private var colorDiffusionSlider:FloatParameter = resolume.addFloatParameter("color diffusion", 0);
-		//button
-		private var switchEvent:EventParameter = resolume.addEventParameter("Switch mode!");
+		private var switchSlider:FloatParameter = resolume.addFloatParameter("Switch mode!", 0);
+		private var wrapxSlider:FloatParameter = resolume.addFloatParameter("WrapX", 0);
+		private var wrapySlider:FloatParameter = resolume.addFloatParameter("WrapY", 0);
+		private var scrollxSlider:FloatParameter = resolume.addFloatParameter("ScrollX", 0);
+		private var scrollySlider:FloatParameter = resolume.addFloatParameter("ScrollY", 0);
+
 		
 		private const origin:Point = new Point();
 		private const identity:Matrix = new Matrix();
@@ -60,6 +64,10 @@ package
 		
 		private var xs:uint = 320;
 		private var ys:uint = 240;
+		private var wx:Boolean = false;
+		private var wy:Boolean = false;
+		private var sx:Boolean = false;
+		private var sy:Boolean = false;
 		
 		private static const DRAW_SCALE:Number = 0.5;
 		
@@ -91,6 +99,8 @@ package
 		private var sparkleDrawMatrix:Matrix = new Matrix(0.25, 0, 0, 0.25, 0, 0);
 		
 		public static var frameCount:uint = 0;
+		public static var mx:uint = 0;
+		public static var my:uint = 0;
 		
 		private var display:Bitmap;
 		private var pm:ParticleManager;
@@ -114,11 +124,43 @@ package
 			fSolver.solverIterations = Math.round(this.precSlider.getValue() * 10);
 			fSolver.colorDiffusion = this.colorDiffusionSlider.getValue() * .001;
 			
-			if(event.object == this.switchEvent) 
+			if(event.object == this.switchSlider) 
 			{
 				restart();
 			}			
+			if(event.object == this.wrapxSlider) 
+			{				
+				wx = !wx;
+			}			
+			if(event.object == this.wrapySlider) 
+			{
+				wy = !wy;
+			}			
+			if(event.object == this.scrollxSlider) 
+			{
+				sx = !sx;
+			}			
+			if(event.object == this.scrollySlider) 
+			{
+				sy = !sy;
+			}			
+			fSolver.setWrap( wx, wy );
+			setScroll(sx, sy);
 			if ( ys > 40) handleForce(xs, ys - 40);
+		}
+		private function setScroll(sx:Boolean = false, sy:Boolean = false):void
+		{
+			if (sx) {
+				mx = 4;
+			} else {
+				mx = 0;
+			}
+			
+			if (sy) {
+				my = 4;
+			} else {
+				my = 0;
+			}
 		}
 		private function init(e:Event = null):void 
 		{
@@ -223,7 +265,9 @@ package
 				drawParticlesBitmap();
 				//trace(getTimer() - t);
 			}
-
+			if(mx != 0 || my != 0) {
+				moveScreen();
+			}
 			
 			frameCount = ++frameCount % 0xFFFFFFFF;
 		}
@@ -277,10 +321,11 @@ package
 		
 		public function moveScreen():void
 		{
-			/*if (mx > 0 && frameCount & 1) fSolver.shiftLeft();
+			if (mx > 0 && frameCount & 1) fSolver.shiftLeft();
 			if (my > 0 && frameCount & 1) fSolver.shiftUp();
 			
-			screen.scroll(-mx, -my);*/
+			screen.scroll(-mx, -my);
+
 			screen.fillRect(new Rectangle(sw - 4, 0, 4, sh), 0x000000);
 		}
 		

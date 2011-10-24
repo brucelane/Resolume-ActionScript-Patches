@@ -2,8 +2,8 @@
 <statuses type="array">
 <status>
   <created_at>Thu May 05 01:13:02 +0000 2011</created_at>
-  <id>Twitter user ID</id>
-  <text>Twitter Feed Not Available</text>
+  <id>batchass</id>
+  <text>  Attention ! Caution ! Olà !   </text>
   <source>web</source>
   <truncated>false</truncated>
 
@@ -25,8 +25,7 @@
 <status>
   <created_at>Mon Apr 25 17:41:14 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Check your internet connection
-  </text>
+  <text>Alert ! DIMANCHE ROUGE Alert ! </text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -48,7 +47,7 @@
 <status>
   <created_at>Fri Apr 22 14:34:55 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Twitter Feed Not Available</text>
+  <text>Please Tweet @batchass.</text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -70,7 +69,7 @@
 <status>
   <created_at>Thu Apr 21 13:30:55 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Check your internet connection</text>
+  <text>twitter.com/batchass</text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -92,7 +91,7 @@
 <status>
   <created_at>Wed Apr 20 11:03:29 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Twitter Feed Not Available</text>
+  <text>Ceci n'est pas un exercice. </text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -114,7 +113,7 @@
 <status>
   <created_at>Tue Apr 19 13:37:26 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Check your internet connection</text>
+  <text>This is for real.</text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -136,7 +135,7 @@
 <status>
   <created_at>Fri Apr 15 14:31:21 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Twitter Feed Not Available</text>
+  <text>Déclenchez le BATCHASS généralisé. </text>
   <source>web</source>
 
   <truncated>false</truncated>
@@ -158,7 +157,7 @@
 <status>
   <created_at>Thu Apr 14 10:27:39 +0000 2011</created_at>
   <id>Twitter user ID</id>
-  <text>Check your internet connection</text>
+  <text>Let's start the BATCHASS revolution.</text>
   <source>web</source>
 
   <truncated>false</truncated>

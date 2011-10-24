@@ -31,8 +31,11 @@ package {
 	import flash.net.FileFilter;
 	
 	[SWF(width="640", height="480", backgroundColor="0x000000", frameRate="60")]
-	public class Kaleidoscope extends Sprite{
-		
+	public class Kaleidoscope extends Sprite
+	{
+		private const WIDTH:int = 640;
+		private const HEIGHT:int = 480;
+
 		private var bmpd     :BitmapData;
 		
 		private var verD     :Vector.<Number>;

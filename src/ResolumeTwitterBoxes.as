@@ -24,7 +24,7 @@ package
 	//public class ResolumeTwitterBoxes extends Sprite movieclip?
 	public class ResolumeTwitterBoxes extends Sprite
 	{
-		private var textTimer:Timer = new Timer(30000);  /// this is the timer for tweet refresh NOTE! Can't request more than 150 tweets an hour, so doing one req. per minute to be safe
+		private var textTimer:Timer = new Timer(60000);  /// this is the timer for tweet refresh NOTE! Can't request more than 150 tweets an hour, so doing one req. per minute to be safe
 		//// xml data
 		private var xmlData;
 
@@ -62,8 +62,9 @@ package
 		private var label:TextField = new TextField(); 
 		
 		private var textToType:String	= '';
-		private var timer:Timer	= new Timer(60);
+		private var timer:Timer	= new Timer(120);
 		private var typeIndex:int = 0;
+		private var sentenceIndex:int = 0;
 		
 		public function ResolumeTwitterBoxes()
 		{
@@ -85,7 +86,7 @@ package
 			format1.letterSpacing = theLetterSpacing;
 			format1.color = theFontColor; 
 			format1.leading = theFontLeading;
-			format1.align = "center";
+			//format1.align = "center";
 			///
 		}
 		
@@ -144,7 +145,13 @@ package
 			loader.addEventListener(Event.COMPLETE, parseXML);
 			// loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, SecurityError);
 			// var urlReq = new URLRequest("xml/twitterPlaceHolder.xml");
-			var urlReq:URLRequest = new URLRequest("http://twitter.com/statuses/user_timeline/" + _user1 + ".xml?count=1"); /// gets particular user tweets
+			/*		
+			http://search.twitter.com/search.atom?q=flashbrighton – all tweets mentioning “flashbrighton”
+			http://search.twitter.com/search.atom?q=from%3Azenbullets – all tweets from user “zenbullets”
+			http://search.twitter.com/search.atom?q=flashbrighton+from%3Azenbullets – all tweets from user “zenbullets” that refer to “flashbrighton”
+			*/
+			//var urlReq:URLRequest = new URLRequest("http://search.twitter.com/search.atom?q=batchass"); /// gets particular user tweets
+			var urlReq:URLRequest = new URLRequest("http://twitter.com/statuses/user_timeline/" + _user1 + ".xml?count=5"); /// gets particular user tweets
 			loader.load(urlReq);
 		}
 		private function catchIOError(e:Event)
@@ -167,25 +174,38 @@ package
 			
 			updateText(null);
 			//start
-			textToType = theTweetIndex[0];
+			textToType = theTweetIndex[sentenceIndex];
+			typeIndex = 0;
 			timer.addEventListener(TimerEvent.TIMER, _onTimer);
 			timer.start();
 			
-			label.width = 500;
+			label.width = 640;
 			label.autoSize = TextFieldAutoSize.CENTER;
 			label.setTextFormat(format1); 
 			label.wordWrap = true;		
 		}
 		private function _onTimer(event:TimerEvent):void 
 		{
-			label.text = textToType.substr(0, ++typeIndex);
-			label.setTextFormat(format1); 
-			trace("typeIndex: "+typeIndex+" textToType.length: "+textToType.length);
-			if (typeIndex >= textToType.length) 
+			if (textToType)
 			{
+				label.text = textToType.substr(0, ++typeIndex);
+				label.setTextFormat(format1); 
 				trace("typeIndex: "+typeIndex+" textToType.length: "+textToType.length);
-				timer.removeEventListener(TimerEvent.TIMER, _onTimer);
-				timer.stop();
+				if (typeIndex >= textToType.length) 
+				{
+					/*trace("typeIndex: "+typeIndex+" textToType.length: "+textToType.length);
+					*/
+					sentenceIndex++;
+					//typeIndex = 0;
+					if (sentenceIndex>4) 
+					{
+						sentenceIndex = 0;
+						timer.removeEventListener(TimerEvent.TIMER, _onTimer);
+						timer.stop();
+					}
+					textToType += '\n' +theTweetIndex[sentenceIndex];
+				}
+				
 			}
 		}
 		private function updateText(e:Event):void

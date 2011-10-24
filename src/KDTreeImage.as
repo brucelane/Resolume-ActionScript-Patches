@@ -76,7 +76,7 @@ package
 	 * 
 	 * @author Glidias
 	 */
-	[SWF(width = "640", height = "480", frameRate = "30", backgroundColor = "#ffffff")]
+	[SWF(width = "640", height = "480", frameRate = "30", backgroundColor = "#ff0000")]
 	
 	public class KDTreeImage extends Sprite 
 	{
@@ -152,7 +152,7 @@ package
 			cameraController.lookAtXYZ(camera.x, camera.y, 0);
 			
 			var skybox:SkyBox = new SkyBox(99999999);
-			skybox.setMaterialToAllFaces( new FillMaterial(0xEEFEFF) );
+			skybox.setMaterialToAllFaces( new FillMaterial(0) );//xEEFEFF
 			rootContainer.addChild(skybox);
 			
 			
