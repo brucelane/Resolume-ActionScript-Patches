@@ -9,8 +9,10 @@ package {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Loader;
+	import flash.display.LoaderInfo;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.MouseEvent;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
@@ -28,9 +30,9 @@ package {
 	import resolumeCom.*;
 	import resolumeCom.events.*;
 	import resolumeCom.parameters.*;
-
+	
 	[SWF(width='640', height='480', frameRate='30', backgroundColor='0x333333')] 
-	final public class ResolumeGravias extends Patch implements ISurfaceGenerator 
+	final public class Gravias extends Patch implements ISurfaceGenerator 
 	{		
 		public const mouseForce:Number = 20;
 		public const oscillationDumper:Number = 0.05;
@@ -63,12 +65,10 @@ package {
 		private var paramExplode:EventParameter = resolume.addEventParameter("Explode!");
 		private var context:SurfaceContext;
 		
-		public function ResolumeGravias() {
+		public function Gravias() {
 			
 			init();
 			
-			addChild(bmp);
-			resolume.addParameterListener(parameterChanged);
 		}
 		//this method will be called everytime you change a paramater in Resolume
 		public function parameterChanged(event:ChangeEvent): void
@@ -94,7 +94,24 @@ package {
 		}		
 		private function init():void
 		{
-			sourceBMP = new BatchassImage();
+			var loader:Loader = new Loader;
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, gotImage);
+			loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, ioErrorHandler ) ; 
+			loader.load (
+				new URLRequest ("gravias.jpg")
+			);
+		}
+		private function ioErrorHandler( event:IOErrorEvent ):void
+		{
+			trace( 'An IO Error has occured: ' + event.text );
+		} 
+		private function gotImage (e:Event):void 
+		{
+			trace("gotImage");
+			var loadedBitmap:Bitmap = (LoaderInfo(e.target).content) as Bitmap;
+			sourceBMP = loadedBitmap.bitmapData;
+		
+			//sourceBMP = new BatchassImage();
 			pictureX = (stage.stageWidth-sourceBMP.width)/2;
 			pictureY = (stage.stageHeight-sourceBMP.height)/2;
 			matrix = new Array();
@@ -108,6 +125,8 @@ package {
 			
 			createPoints();
 			stage.addEventListener(Event.ENTER_FRAME,frame,false,0,true);
+			addChild(bmp);
+			resolume.addParameterListener(parameterChanged);
 			
 		}
 		public function update(time:Number):void {}

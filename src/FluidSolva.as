@@ -21,6 +21,9 @@ package
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuBuiltInItems;
 	import flash.ui.ContextMenuItem;
@@ -106,13 +109,16 @@ package
 		private var pm:ParticleManager;
 		private var prevMouse:Point = new Point();
 		private var fluidImage:Bitmap;
+
+		/*private var label:TextField = new TextField(); 
+		private var format1:TextFormat = new TextFormat();*/
 		
 		public function FluidSolva() 
 		{
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
-		//this method will be called everytime you change a paramater in Resolume
+		//this method will be called everytime you change a parameter in Resolume
 		public function parameterChanged(event:ChangeEvent): void
 		{
 			xs = Math.round(this.xSlider.getValue() * sw);
@@ -124,26 +130,18 @@ package
 			fSolver.solverIterations = Math.round(this.precSlider.getValue() * 10);
 			fSolver.colorDiffusion = this.colorDiffusionSlider.getValue() * .001;
 			
-			if(event.object == this.switchSlider) 
+			if ( drawMode != Math.round( this.switchSlider.getValue() * 3 ))
 			{
+				drawMode = Math.round( this.switchSlider.getValue() * 3 );
+				/*label.text = drawMode.toString();
+				label.setTextFormat(format1);*/ 
 				restart();
-			}			
-			if(event.object == this.wrapxSlider) 
-			{				
-				wx = !wx;
-			}			
-			if(event.object == this.wrapySlider) 
-			{
-				wy = !wy;
-			}			
-			if(event.object == this.scrollxSlider) 
-			{
-				sx = !sx;
-			}			
-			if(event.object == this.scrollySlider) 
-			{
-				sy = !sy;
-			}			
+			}
+			wx = (this.wrapxSlider.getValue() == 1);
+			wy = (this.wrapySlider.getValue() == 1);
+			sx = (this.scrollxSlider.getValue() == 1);
+			sy = (this.scrollySlider.getValue() == 1);
+
 			fSolver.setWrap( wx, wy );
 			setScroll(sx, sy);
 			if ( ys > 40) handleForce(xs, ys - 40);
@@ -167,7 +165,19 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			resolume.addParameterListener(parameterChanged);
 			initStage();
-			//fSolver.
+			
+			/*format1.bold = true;
+			format1.size = 48;
+			
+			format1.color = 0xFF0000; 
+			addChild(label);
+			label.x = 200;
+			label.width = 440;
+			label.autoSize = TextFieldAutoSize.CENTER;
+			label.wordWrap = true;	
+			label.text = drawMode.toString();
+			label.setTextFormat(format1); */
+			
 			fSolver.rgb = true;
 			fSolver.fadeSpeed = .007;
 			fSolver.deltaT = .5;
@@ -204,13 +214,13 @@ package
 			addChild(b);
 			
 			addEventListener(Event.ENTER_FRAME, render);
-			stage.addEventListener(MouseEvent.CLICK, restart);		
-			
+			//stage.addEventListener(MouseEvent.CLICK, restart);		
+			parameterChanged( null );
 		}
 		
 		private function restart():void
 		{
-			drawMode = ++drawMode % 4;
+			//drawMode = ++drawMode % 4;
 			
 			fade.fillRect(fade.rect, 0x0);
 			screen.fillRect(screen.rect, 0x0);
